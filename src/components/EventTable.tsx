@@ -52,6 +52,7 @@ const EventTable = ({ events, refresh }: EventProps) => {
 	};
 
 	const handleClose = () => {
+		setEvent(undefined);
 		setModal(false);
 	};
 
@@ -61,6 +62,7 @@ const EventTable = ({ events, refresh }: EventProps) => {
 	};
 
 	const handleDeleteClose = () => {
+		setEvent(undefined);
 		setDelete(false);
 	};
 

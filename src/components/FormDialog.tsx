@@ -97,11 +97,13 @@ const EventDialog = ({
 	};
 
 	useEffect(() => {
-		setValue("name", event?.name);
-		setValue("location", event?.location);
-		setValue("startDate", dayjs(event?.startDate));
-		setValue("endDate", dayjs(event?.endDate));
-		setValue("poster", event?.poster);
+		if (event) {
+			setValue("name", event?.name);
+			setValue("location", event?.location);
+			setValue("startDate", dayjs(event?.startDate));
+			setValue("endDate", dayjs(event?.endDate));
+			setValue("poster", event?.poster);
+		}
 	}, [event]);
 
 	return (
