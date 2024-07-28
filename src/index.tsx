@@ -6,25 +6,52 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import Main from "./Main";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+import Layout from "./Layout";
+import Register from "./Register";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Main />,
-	},
-	{
-		path: "/user",
-		element: <div>Hello User!</div>,
+		element: <Layout></Layout>,
+		children: [
+			{
+				path: "",
+				element: <Main />,
+			},
+			{
+				path: "login",
+				element: <Login />,
+			},
+			{
+				path: "register",
+				element: <Register />,
+			},
+			{
+				path: "dashboard",
+				element: <Dashboard />,
+			},
+		],
 	},
 ]);
 
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<LocalizationProvider dateAdapter={AdapterDayjs}>
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
+		</LocalizationProvider>
 	</React.StrictMode>
 );
